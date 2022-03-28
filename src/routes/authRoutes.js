@@ -5,7 +5,6 @@ import Login from '../pages/login.js';
 import Register from '../pages/register.js';
 import Dashboard from '../pages/Dashboard/dashboard.js';
 import JwtAuth from '../pages/jwtauth.js';
-import Logout from '../pages/logout.js';
 
 const Stack = createStackNavigator();
 

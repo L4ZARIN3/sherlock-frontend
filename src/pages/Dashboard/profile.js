@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { View, SafeAreaView, KeyboardAvoidingView,ScrollView,TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
@@ -14,7 +14,7 @@ export default function Profile({navigation}){
   const [password, setPassword] = useState(null);
   const [password_confirmation, setPassword_Confirmation] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     async function handleUserNextScreen() {
 
@@ -58,16 +58,11 @@ export default function Profile({navigation}){
           }
         });
         
+        Alert.alert(response.data.message);
         console.log(response.data);
-
       } catch (err) {
-
-        const erros = err.response.data;
-        console.log(erros);
-        erros.forEach(function(element) {
-          console.log(element);
-        });
-
+        console.log(err);
+        //Alert.alert(err.response.data.message);
 
       }
 
@@ -75,7 +70,8 @@ export default function Profile({navigation}){
   }
 
   return (
-      <View style={styles.container}>
+    <ScrollView style={styles.ScrollView}>
+      <SafeAreaView style={styles.container}>
       <Text style={{ fontSize: 30, color: '#FFFF' }}>Configurações</Text>
         <View style={{ flexDirection: 'column'} }>
             <Text style={styles.text}>Nome</Text>
@@ -98,7 +94,9 @@ export default function Profile({navigation}){
         </TouchableOpacity>
 
         </View>
-      </View>
+        
+      </SafeAreaView>
+      </ScrollView>
     );
 
 }
@@ -111,7 +109,10 @@ const styles = StyleSheet.create({
         container:{
             flex: 1,
             alignItems: 'center',
-            backgroundColor: '#484553'
+        },
+        ScrollView:{
+          backgroundColor: '#484553',
+          marginHorizontal: 0,
         },
         input:{
             marginTop: 10,
@@ -126,14 +127,15 @@ const styles = StyleSheet.create({
             width: 300,
             height: 42,
             backgroundColor: '#3e236e',
-            marginTop: 10,
+            marginTop: 20,
             borderRadius: 4,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
           botaoText: {
             fontSize: 16,
             fontWeight: 'bold',
-            color: '#FFF'
+            color: '#FFF',
+
         }
 });

@@ -1,12 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState, useEffect } from 'react'
-import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
-import auth from '../services/auth';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useLayoutEffect } from 'react'
+import { View, ActivityIndicator } from 'react-native';
 
 export default function Logout({ navigation }){
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     AsyncStorage.setItem("TOKEN","").then(() => {
         
@@ -19,9 +17,9 @@ export default function Logout({ navigation }){
   }, []);
 
     return (
-      <View>
-        <Text>OI</Text>
-      </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#484553' }}>
+      <ActivityIndicator size="large" color="#3e236e" />
+    </View>
     );
 
 }
